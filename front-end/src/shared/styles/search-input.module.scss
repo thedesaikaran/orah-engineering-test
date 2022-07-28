@@ -1,0 +1,29 @@
+@import "variables";
+
+.search-input-wrapper {
+  :global {
+    .MuiInputBase-root {
+      .MuiOutlinedInput-notchedOutline {
+        border-radius: 1rem;
+        border: 1px solid $white;
+      }
+
+      &.Mui-focused,
+      &:hover {
+        .MuiOutlinedInput-notchedOutline {
+          border: 1px solid $white;
+        }
+      }
+
+      .MuiInputBase-input,
+      .MuiInputAdornment-root {
+        color: $white;
+      }
+
+      .MuiInputBase-input {
+        padding-top: 0.375rem;
+        padding-bottom: 0.375rem;
+      }
+    }
+  }
+}
