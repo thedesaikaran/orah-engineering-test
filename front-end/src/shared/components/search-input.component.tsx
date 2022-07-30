@@ -13,7 +13,7 @@ const SearchInput: React.FC<Props> = ({ handleSearch }) => {
     <TextField
       value={searchText}
       onChange={(event) => setSearchText(event.target.value)}
-      onKeyUp={() => handleSearch(searchText)}
+      onKeyUp={() => handleSearch(searchText.trim().toLowerCase())}
       variant="outlined"
       size="small"
       color="primary"

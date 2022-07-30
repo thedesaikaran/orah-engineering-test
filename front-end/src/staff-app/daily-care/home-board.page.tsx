@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import Button from "@material-ui/core/ButtonBase"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,6 +11,7 @@ import { StudentListTile } from "staff-app/components/student-list-tile/student-
 import { ActiveRollOverlay, ActiveRollAction } from "staff-app/components/active-roll-overlay/active-roll-overlay.component"
 import SortButtonWithOptions, { SortOption } from "shared/components/sort-button-with-options.component"
 import SearchInput from "shared/components/search-input.component"
+import HomeBoardProvider, { HomeBoardContext, IHomeBoardContext, SortKeys } from "./home-board.context"
 
 const sortOptions: SortOption[] = [
   {
@@ -25,11 +26,6 @@ const sortOptions: SortOption[] = [
 
 export const HomeBoardPage: React.FC = () => {
   const [isRollMode, setIsRollMode] = useState(false)
-  const [getStudents, data, loadState] = useApi<{ students: Person[] }>({ url: "get-homeboard-students" })
-
-  useEffect(() => {
-    void getStudents()
-  }, [getStudents])
 
   const onToolbarAction = (action: ToolbarAction) => {
     if (action === "roll") {
@@ -44,31 +40,49 @@ export const HomeBoardPage: React.FC = () => {
   }
 
   return (
-    <>
+    <HomeBoardProvider>
       <S.PageContainer>
         <Toolbar onItemClick={onToolbarAction} />
-
-        {loadState === "loading" && (
-          <CenteredContainer>
-            <FontAwesomeIcon icon="spinner" size="2x" spin />
-          </CenteredContainer>
-        )}
-
-        {loadState === "loaded" && data?.students && (
-          <>
-            {data.students.map((s) => (
-              <StudentListTile key={s.id} isRollMode={isRollMode} student={s} />
-            ))}
-          </>
-        )}
-
-        {loadState === "error" && (
-          <CenteredContainer>
-            <div>Failed to load</div>
-          </CenteredContainer>
-        )}
+        <StudentList isRollMode={isRollMode} />
       </S.PageContainer>
       <ActiveRollOverlay isActive={isRollMode} onItemClick={onActiveRollAction} />
+    </HomeBoardProvider>
+  )
+}
+
+const StudentList: React.FC<{ isRollMode: boolean }> = ({ isRollMode }) => {
+  const { filteredStudents, setStudents }: IHomeBoardContext = useContext(HomeBoardContext)
+  const [getStudents, data, loadState] = useApi<{ students: Person[] }>({ url: "get-homeboard-students" })
+
+  useEffect(() => {
+    void getStudents()
+  }, [getStudents])
+
+  useEffect(() => {
+    setStudents(data?.students || [])
+  }, [data])
+
+  return (
+    <>
+      {loadState === "loading" && (
+        <CenteredContainer>
+          <FontAwesomeIcon icon="spinner" size="2x" spin />
+        </CenteredContainer>
+      )}
+
+      {loadState === "loaded" && (
+        <>
+          {filteredStudents.map((student) => (
+            <StudentListTile key={student.id} isRollMode={isRollMode} student={student} />
+          ))}
+        </>
+      )}
+
+      {loadState === "error" && (
+        <CenteredContainer>
+          <div>Failed to load</div>
+        </CenteredContainer>
+      )}
     </>
   )
 }
@@ -79,10 +93,16 @@ interface ToolbarProps {
 }
 const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { onItemClick } = props
+  const { handleStudentsSort, setSearchKeyword } = useContext(HomeBoardContext)
+
+  function handleSort(option: SortOption, isAscendingOrder: boolean) {
+    const { key } = option
+    handleStudentsSort(key, isAscendingOrder)
+  }
   return (
     <S.ToolbarContainer>
-      <SortButtonWithOptions sortOptions={sortOptions} handleSort={() => onItemClick("sort")} />
-      <SearchInput handleSearch={() => {}} />
+      <SortButtonWithOptions sortOptions={sortOptions} handleSort={handleSort} />
+      <SearchInput handleSearch={setSearchKeyword} />
       <S.Button onClick={() => onItemClick("roll")}>Start Roll</S.Button>
     </S.ToolbarContainer>
   )

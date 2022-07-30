@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { Button, ButtonGroup, ClickAwayListener, MenuItem, MenuList, Paper, Popper } from "@material-ui/core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import styled from "styled-components"
 
 export interface SortOption {
   key: string
@@ -37,7 +36,7 @@ const SortButtonWithOptions: React.FC<Props> = ({ sortOptions, handleSort }) => 
           {selectedOption.label}
         </Button>
         <Button color="inherit" size="small" onClick={() => setIsAscendingOrder(!isAscendingOrder)}>
-          <FontAwesomeIcon icon={`sort-alpha-down${isAscendingOrder ? "-alt" : ""}`} />
+          <FontAwesomeIcon icon={`sort-alpha-down${isAscendingOrder ? "" : "-alt"}`} />
         </Button>
       </ButtonGroup>
       <Popper placement="bottom-start" open={isOptionsDropdownOpen} anchorEl={sortButtonWrapperRef.current}>

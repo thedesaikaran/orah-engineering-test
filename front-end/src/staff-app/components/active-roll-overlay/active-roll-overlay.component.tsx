@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext, useMemo } from "react"
 import styled from "styled-components"
 import Button from "@material-ui/core/Button"
 import { BorderRadius, Spacing } from "shared/styles/styles"
-import { RollStateList } from "staff-app/components/roll-state/roll-state-list.component"
+import { RollStateList, StateList, ItemType } from "staff-app/components/roll-state/roll-state-list.component"
+import { HomeBoardContext } from "staff-app/daily-care/home-board.context"
 
 export type ActiveRollAction = "filter" | "exit"
 interface Props {
@@ -10,22 +11,41 @@ interface Props {
   onItemClick: (action: ActiveRollAction, value?: string) => void
 }
 
+const INITIAL_ROLL_STATE_LIST_OBJECT: { [key: ItemType]: number } = {
+  all: 0,
+  present: 0,
+  late: 0,
+  absent: 0,
+}
+
 export const ActiveRollOverlay: React.FC<Props> = (props) => {
   const { isActive, onItemClick } = props
+  const { students, setFilterAttendanceStatus } = useContext(HomeBoardContext)
+  const rollStateList: StateList = useMemo(() => {
+    const rollsObject = students.reduce(
+      (returnRollObject, student) => {
+        if (student?.rollState) {
+          const newCount = (returnRollObject[student.rollState] || 0) + 1
+          return { ...returnRollObject, [student.rollState as ItemType]: newCount as number }
+        }
+        return returnRollObject
+      },
+      { ...INITIAL_ROLL_STATE_LIST_OBJECT, ["all" as ItemType]: students.length as number } as any
+    )
+
+    return Object.entries(rollsObject).map((rollState: Array<[ItemType, number]>) => ({ type: rollState[0], count: rollState[1] }))
+  }, [students])
+
+  function handleFilter(type: ItemType) {
+    setFilterAttendanceStatus(type === "all" ? "" : type)
+  }
 
   return (
     <S.Overlay isActive={isActive}>
       <S.Content>
         <div>Class Attendance</div>
         <div>
-          <RollStateList
-            stateList={[
-              { type: "all", count: 0 },
-              { type: "present", count: 0 },
-              { type: "late", count: 0 },
-              { type: "absent", count: 0 },
-            ]}
-          />
+          <RollStateList stateList={rollStateList} onItemClick={handleFilter} />
           <div style={{ marginTop: Spacing.u6 }}>
             <Button color="inherit" onClick={() => onItemClick("exit")}>
               Exit
