@@ -1,0 +1,76 @@
+@import "variables";
+
+.popup-title {
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: $dark-blue;
+  :global {
+    .MuiTypography-root {
+      font-size: 16px;
+      color: $white;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 10px;
+    left: auto;
+    top: 10px;
+    background-color: transparent;
+    border: none;
+    color: $white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
+
+.student-roll-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dotted $dark-gray;
+
+  &:last-of-type {
+    border: none;
+  }
+}
+
+.filter-state-row {
+  display: flex;
+  justify-content: center;
+
+  .roll-state-item {
+    margin-left: 8px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-bottom: 1px solid transparent;
+
+    .label {
+      margin-left: 4px;
+      font-size: 14px;
+      text-transform: capitalize;
+    }
+
+    &.present-active {
+      border-color: $success;
+    }
+
+    &.late-active {
+      border-color: $warning;
+    }
+
+    &.absent-active {
+      border-color: $muted;
+    }
+
+    &.unmark-active {
+      border-color: $dark-blue;
+    }
+  }
+}

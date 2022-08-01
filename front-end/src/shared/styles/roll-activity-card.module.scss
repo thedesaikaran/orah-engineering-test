@@ -1,0 +1,74 @@
+@import "variables";
+
+@keyframes slide-from-bottom {
+  0% {
+    margin-top: 10%;
+    opacity: 0;
+  }
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+.wrapper {
+  background-color: $dark-blue;
+  box-shadow: 0px 0px 10px $shadow-blue;
+  width: 100%;
+  padding: 4px 17px;
+  margin: 12px 0px;
+  color: $white;
+  border-radius: 10px;
+  animation: slide-from-bottom 0.5s ease-in;
+  position: relative;
+
+  .all-present-tag {
+    display: flex;
+    justify-content: center;
+    span {
+      position: absolute;
+      color: $white;
+      background-color: green;
+      top: 0;
+      margin: 0px auto;
+      padding: 4px 8px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      font-weight: 500;
+    }
+  }
+
+  .activity-info-row {
+    display: flex;
+    justify-content: space-between;
+
+    .label {
+      font-size: 14px;
+      font-weight: 500;
+
+      .value {
+        font-weight: 400;
+      }
+    }
+  }
+
+  .roll-info-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+
+    .view-students-btn {
+      background-color: transparent;
+      border: none;
+      color: $white;
+      padding: 0;
+      text-decoration: underline;
+      margin-left: auto;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      cursor: pointer;
+    }
+  }
+}
