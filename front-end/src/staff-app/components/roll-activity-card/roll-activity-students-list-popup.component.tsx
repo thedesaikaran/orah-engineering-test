@@ -103,12 +103,18 @@ const RollActivityStudentsList: React.FC<Props> = ({ rollActivity, open = false,
                 </button>
               ))}
             </div>
-            {filteredStudents.map((student) => (
-              <div className={style["student-roll-row"]} key={`student-list-popup-${student.id}`}>
-                <p>{PersonHelper.getFullName(student)}</p>
-                <RollStateIcon type={studentIdRolls[student.id]} size={24} />
+            {filteredStudents.length ? (
+              filteredStudents.map((student) => (
+                <div className={style["student-roll-row"]} key={`student-list-popup-${student.id}`}>
+                  <p>{PersonHelper.getFullName(student)}</p>
+                  <RollStateIcon type={studentIdRolls[student.id]} size={24} />
+                </div>
+              ))
+            ) : (
+              <div className={style["no-students-placeholder"]}>
+                No students {ALL_ROLL_STATE_TYPES.length !== filteredRollStates.length && `for ${filteredRollStates.join(", ")} roll states`}
               </div>
-            ))}
+            )}
           </>
         )}
       </DialogContent>
