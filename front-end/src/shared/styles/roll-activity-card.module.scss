@@ -11,16 +11,29 @@
   }
 }
 
+@keyframes placeholder-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .wrapper {
-  background-color: $dark-blue;
+  background-color: $white;
   box-shadow: 0px 0px 10px $shadow-blue;
   width: 100%;
   padding: 4px 17px;
   margin: 12px 0px;
-  color: $white;
+  color: $dark-blue;
   border-radius: 10px;
   animation: slide-from-bottom 0.5s ease-in;
   position: relative;
+  border-bottom: 5px solid $dark-blue;
 
   .all-present-tag {
     display: flex;
@@ -28,7 +41,7 @@
     span {
       position: absolute;
       color: $white;
-      background-color: green;
+      background-color: $success;
       top: 0;
       margin: 0px auto;
       padding: 4px 8px;
@@ -61,7 +74,7 @@
     .view-students-btn {
       background-color: transparent;
       border: none;
-      color: $white;
+      color: $dark-blue;
       padding: 0;
       text-decoration: underline;
       margin-left: auto;
@@ -69,6 +82,35 @@
       right: 0;
       bottom: 0;
       cursor: pointer;
+    }
+  }
+
+  &.placeholder {
+    animation: placeholder-animation 3s ease-in-out 1s infinite;
+    .activity-info-row {
+      .label {
+        background-color: $black-110;
+        width: 180px;
+        height: 16px;
+        animation: placeholder-animation 1.5s ease-in-out 0.5s infinite;
+      }
+    }
+
+    .roll-info-row {
+      .roll-state-list,
+      .view-students-btn {
+        background-color: $black-110;
+        height: 16px;
+        animation: placeholder-animation 1.5s ease-in-out 0.5s infinite;
+      }
+
+      .roll-state-list {
+        width: 210px;
+      }
+
+      .view-students-btn {
+        width: 85px;
+      }
     }
   }
 }
