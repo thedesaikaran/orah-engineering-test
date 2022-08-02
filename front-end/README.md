@@ -36,6 +36,14 @@ Once the roll has been saved, you can call the `get-activities` route to get lis
 
 Most of the successful candidates have shown strong styling skills and a good sense of UX. Therefore it is recommended that you spend an extra effort to make it looks pretty ✨.
 
+Following snaps are with reference to the #4 Bonus Task:
+
+![Roll Activity Placeholder](../screenshots/04_roll_activity_placeholder.png)
+
+![Roll Activity List](../screenshots/05_roll_activity_list.png)
+
+![Roll Activity Students Popup with filter](../screenshots/06_roll_activity_students_list.png)
+
 ## How to run
 You will need to have Node **10.16.0** or later on your local development machine. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
 
