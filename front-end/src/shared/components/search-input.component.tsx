@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { InputAdornment, TextField } from "@material-ui/core"
-import Style from "../styles/search-input.module.scss"
+import Style from "shared/styles/search-input.module.scss"
 
 interface Props {
   handleSearch: (searchKeyword: string) => void

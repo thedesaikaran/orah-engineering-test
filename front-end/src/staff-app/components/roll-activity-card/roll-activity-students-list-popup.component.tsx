@@ -5,10 +5,10 @@ import { useApi } from "shared/hooks/use-api"
 import { Person, PersonHelper } from "shared/models/person"
 import { CenteredContainer } from "shared/components/centered-container/centered-container.component"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { RollStateIcon } from "../roll-state/roll-state-icon.component"
+import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component"
 import { RolllStateType } from "shared/models/roll"
-import style from "../../../shared/styles/roll-activity-students-list-popup.module.scss"
-import { ItemType } from "../roll-state/roll-state-list.component"
+import style from "shared/styles/roll-activity-students-list-popup.module.scss"
+import { ItemType } from "staff-app/components/roll-state/roll-state-list.component"
 import cx from "classnames"
 
 interface Props {

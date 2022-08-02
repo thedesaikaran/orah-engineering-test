@@ -1,5 +1,5 @@
 import React from "react"
-import style from "../../../shared/styles/roll-activity-card.module.scss"
+import style from "shared/styles/roll-activity-card.module.scss"
 import cx from "classnames"
 
 const RollActivityPlaceholderCard: React.FC = () => {

@@ -1,8 +1,8 @@
 import React, { useMemo } from "react"
 import { getFormattedDate } from "shared/helpers/global"
 import { Activity } from "shared/models/activity"
-import style from "../../../shared/styles/roll-activity-card.module.scss"
-import { ItemType, RollStateList, StateList } from "../roll-state/roll-state-list.component"
+import style from "shared/styles/roll-activity-card.module.scss"
+import { ItemType, RollStateList, StateList } from "staff-app/components/roll-state/roll-state-list.component"
 
 interface Props {
   rollActivityData: Activity

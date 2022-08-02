@@ -11,7 +11,7 @@ import { StudentListTile } from "staff-app/components/student-list-tile/student-
 import { ActiveRollOverlay, ActiveRollAction } from "staff-app/components/active-roll-overlay/active-roll-overlay.component"
 import SortButtonWithOptions, { SortOption } from "shared/components/sort-button-with-options.component"
 import SearchInput from "shared/components/search-input.component"
-import HomeBoardProvider, { HomeBoardContext, IHomeBoardContext, SortKeys } from "./home-board.context"
+import HomeBoardProvider, { HomeBoardContext, IHomeBoardContext } from "./home-board.context"
 
 const sortOptions: SortOption[] = [
   {
