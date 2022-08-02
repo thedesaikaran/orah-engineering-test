@@ -13,6 +13,6 @@ export function httpMock({ success, randomFailure }: Options) {
       } else {
         reject({ message: "Failed" })
       }
-    }, getRandomInt(2, 10) * 100)
+    }, getRandomInt(2, 10) * 300)
   })
 }
