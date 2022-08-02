@@ -17,7 +17,7 @@ const INITIAL_SORT_DETAILS = {
   isAscendingOrder: true,
 }
 
-export interface IHomeBoardContext {
+interface IHomeBoardContext {
   students: Person[]
   filteredStudents: Person[]
   setStudents: (students: Person[]) => void
