@@ -89,6 +89,7 @@ const RollActivityStudentsList: React.FC<Props> = ({ rollActivity, open = false,
         {loadState === "loaded" && (
           <>
             <div className={style["filter-state-row"]}>
+              <span>View: </span>
               {ALL_ROLL_STATE_TYPES.map((type) => (
                 <button
                   type="button"

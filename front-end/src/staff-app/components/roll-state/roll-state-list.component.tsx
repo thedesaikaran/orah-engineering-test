@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component"
 import { Spacing, FontWeight } from "shared/styles/styles"
 import { RolllStateType } from "shared/models/roll"
+import { Tooltip } from "@material-ui/core"
 
 interface Props {
   stateList: StateList[]
@@ -19,21 +20,18 @@ export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemCli
 
   return (
     <S.ListContainer>
-      {stateList.map((s, i) => {
-        if (s.type === "all") {
-          return (
-            <S.ListItem key={i}>
-              <FontAwesomeIcon icon="users" size="sm" style={{ cursor: "pointer" }} onClick={() => onClick(s.type)} />
-              <span>{s.count}</span>
-            </S.ListItem>
-          )
-        }
-
+      {stateList.map((state, stateIndex) => {
         return (
-          <S.ListItem key={i}>
-            <RollStateIcon type={s.type} size={size} onClick={() => onClick(s.type)} />
-            <span>{s.count}</span>
-          </S.ListItem>
+          <Tooltip title={state.tooltip || ''}>
+            <S.ListItem key={`state-list-${stateIndex}`}>
+              {state.type === "all" ? (
+                <FontAwesomeIcon icon="users" size="sm" style={{ cursor: "pointer" }} onClick={() => onClick(state.type)} />
+              ) : (
+                <RollStateIcon type={state.type} size={size} onClick={() => onClick(state.type)} />
+              )}
+              <span>{state.count}</span>
+            </S.ListItem>
+          </Tooltip>
         )
       })}
     </S.ListContainer>
@@ -60,6 +58,7 @@ const S = {
 export interface StateList {
   type: ItemType
   count: number
+  tooltip?: string
 }
 
 export type ItemType = RolllStateType | "all"

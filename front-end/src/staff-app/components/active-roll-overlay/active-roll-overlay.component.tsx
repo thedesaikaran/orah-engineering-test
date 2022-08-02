@@ -38,7 +38,14 @@ export const ActiveRollOverlay: React.FC<Props> = (props) => {
     )
 
     return Object.entries(rollsObject)
-      .map((rollState) => ({ type: rollState[0], count: rollState[1] } as StateList))
+      .map(
+        (rollState) =>
+          ({
+            type: rollState[0],
+            count: rollState[1],
+            tooltip: `View ${rollState[0].charAt(0).toUpperCase() + rollState[0].slice(1)}${rollState[0] !== "all" ? " Only" : ""}`,
+          } as StateList)
+      )
       .slice(0, -1)
   }, [students])
 

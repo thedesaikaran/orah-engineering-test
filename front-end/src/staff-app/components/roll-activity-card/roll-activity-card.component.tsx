@@ -13,22 +13,27 @@ const INITIAL_STATE_LIST: { [key in ItemType]: StateList } = {
   all: {
     type: "all",
     count: 0,
+    tooltip: "View All students",
   },
   present: {
     type: "present",
     count: 0,
+    tooltip: "View Present students",
   },
   late: {
     type: "late",
     count: 0,
+    tooltip: "View Late students",
   },
   absent: {
     type: "absent",
     count: 0,
+    tooltip: "View Absent students",
   },
   unmark: {
     type: "unmark",
     count: 0,
+    tooltip: "View Unmarked students",
   },
 }
 
